@@ -35,30 +35,35 @@ public class MainActivity extends AppCompatActivity {
         sendButtonServer.setOnClickListener(view -> {
             Log.println(Log.INFO, "TAG", "Start Server Request");
             String inputNumber = input.getText().toString();
-//            CallAPI callAPI = new CallAPI("10.0.2.2", 20080, inputNumber, new NetworkTaskListener(){
-            CallAPI callAPI = new CallAPI("se2-submission.aau.at", 20080, inputNumber, new NetworkTaskListener() {
+            if (!inputNumber.isEmpty()) {
+//                CallAPI callAPI = new CallAPI("10.0.2.2", 20080, inputNumber, new NetworkTaskListener(){
+                CallAPI callAPI = new CallAPI("se2-submission.aau.at", 20080, inputNumber, new NetworkTaskListener() {
 
-                @Override
-                public void onSuccess(String response) {
-                    runOnUiThread(() -> {
-                        serverResponse.setText(response);
-                        Log.println(Log.INFO, "TAG", "Success");
-                    });
-                }
+                    @Override
+                    public void onSuccess(String response) {
+                        runOnUiThread(() -> {
+                            serverResponse.setText(response);
+                            Log.println(Log.INFO, "TAG", "Success");
+                        });
+                    }
 
-                @Override
-                public void onError(Exception e) {
-                    runOnUiThread(() -> {
-                        Log.println(Log.ERROR, "TAG", Objects.requireNonNull(e.getMessage()));
-                    });
-                }
-            });
-            callAPI.start();
+                    @Override
+                    public void onError(Exception e) {
+                        runOnUiThread(() -> {
+                            Log.println(Log.ERROR, "TAG", Objects.requireNonNull(e.getMessage()));
+                        });
+                    }
+                });
+                callAPI.start();
+            }
         });
 
         sendButtonLocal.setOnClickListener(view -> {
-            int alternatingSum = calculateAlternatingSum(Integer.parseInt(input.getText().toString()));
-            serverResponse.setText(String.valueOf(alternatingSum));
+            String inputText = input.getText().toString();
+            if (!inputText.isEmpty()) {
+                int alternatingSum = calculateAlternatingSum(Integer.parseInt(input.getText().toString()));
+                serverResponse.setText(String.valueOf(alternatingSum));
+            }
         });
     }
 
