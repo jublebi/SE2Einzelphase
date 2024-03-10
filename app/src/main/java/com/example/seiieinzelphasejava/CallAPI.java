@@ -30,7 +30,8 @@ public class CallAPI extends Thread {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             Log.println(Log.INFO, "TAG", "Write Data");
-            out.write(inputNumber);
+            out.write(inputNumber + "\n");
+            out.flush();
             Log.println(Log.INFO, "TAG", "Read Response");
             StringBuilder response = new StringBuilder();
             String line;
