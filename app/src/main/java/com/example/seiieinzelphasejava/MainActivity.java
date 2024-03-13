@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
             if (!inputText.isEmpty()) {
                 int alternatingSum = calculateAlternatingSum(Integer.parseInt(input.getText().toString()));
                 serverResponse.setText(String.valueOf(alternatingSum));
+                if(alternatingSum % 2 == 0){
+                    serverResponse.setText(String.valueOf("Gerade"));
+                }else{
+                    serverResponse.setText(String.valueOf("Ungerade"));
+                }
             }
         });
     }
